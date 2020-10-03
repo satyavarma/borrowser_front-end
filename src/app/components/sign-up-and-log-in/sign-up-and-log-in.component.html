@@ -1,0 +1,90 @@
+<div class='navDoop'></div>
+<div id="divRight">
+    <div id="contentStyle">
+        <i>
+        Borrowser is a leading online web portal to provide an organised money Lending & Borrowng <b class='bold'>MiddleMen</b> Services between the borrower and the lender.
+        </i>
+    </div>
+    <div id="loginStyle">
+        <p class="subHead"><b>Log-In</b></p>
+        <form class="col-12" [formGroup]="logInForm" (ngSubmit)="onLogInSubmit()">
+            <div class='form-row rowStyle'>
+                <label class='col-sm-3 col-form-label'>UserName:</label>
+                <input formControlName="username" [class.is-invalid]="logInForm.get('username').touched && logInForm.get('username').invalid"
+                 type='email' class='form-control col-sm-9' placeholder="Email">
+                <div class='errorDisp' *ngIf="logInForm.get('username').invalid && logInForm.get('username').touched">
+                    <small class='text-danger' *ngIf=" logInForm.get('username').errors?.required">Required</small>
+                    <small class='text-danger' *ngIf=" logInForm.get('username').errors?.emailError 
+                    && !logInForm.get('username').errors?.required">UserName must be an email Id</small>
+                </div>
+            </div>
+            <div class='form-row rowStyle'>
+                <label class='col-sm-3 col-form-label'>Password:</label>
+                <input formControlName="password" [class.is-invalid]="logInForm.get('password').touched && logInForm.get('password').invalid" 
+                type='password' class='form-control col-sm-9'>
+                 <div class='errorDisp' *ngIf="logInForm.get('password').touched && logInForm.get('password').invalid">
+                    <small class='text-danger' *ngIf="logInForm.get('password').errors?.required">Required</small>
+                </div>
+            </div>
+            <div class='form-row'>
+                <small class='text-danger responseNote' style="margin-left: 75px;">{{logInErrorNote}}</small>
+            </div>
+            <button type="submit">Log-In</button>
+            <pre>
+            </pre>
+        </form>
+    </div>  
+</div>
+<div id="divLeft" >
+    <p class="subHead"><b>Sign-Up</b></p>
+    <form class="col-12"  [formGroup]="signUpForm" (ngSubmit)='onSignUpSubmit()'>
+        <div class='form-row rowStyle'>
+            <label class='col-sm-3 col-form-label'>UserName:</label>
+            <input formControlName="username" [class.is-invalid]="signUpForm.get('username').touched && signUpForm.get('username').invalid"
+            type='email' class="form-control col-sm-9" placeholder="Email">
+            <div class='errorDisp' *ngIf="signUpForm.get('username').invalid && signUpForm.get('username').touched">
+                <small class='text-danger' *ngIf="signUpForm.get('username').errors?.required">Required</small>
+                <small class='text-danger' *ngIf="signUpForm.get('username').errors?.emailError && !signUpForm.get('username').errors?.required">UserName must be an email Id</small>
+            </div>
+        </div>
+        <div class='form-row rowStyle'>
+            <label class='col-sm-3 col-form-label'>Password:</label>
+            <input formControlName="password" [class.is-invalid]="signUpForm.get('password').touched && signUpForm.get('password').invalid"
+            type='password' class='form-control col-sm-9'>
+            <div class='errorDisp' *ngIf="signUpForm.get('password').errors && signUpForm.get('password').touched">
+                <small class='text-danger' *ngIf="signUpForm.get('password').errors?.required">Required</small>
+            </div>
+        </div>
+        <div class='form-row rowStyle'>
+            <label class="col-sm-3 col-form-label">Name :</label>
+            <input formControlName="name" [class.is-invalid]="signUpForm.get('name').touched && signUpForm.get('name').invalid"
+            type='text' class='form-control col-sm-9'>
+            <div class='errorDisp' *ngIf="signUpForm.get('name').errors && signUpForm.get('name').touched">
+                <small class='text-danger' *ngIf="signUpForm.get('name').errors?.required">Required</small>
+                <small class='text-danger' *ngIf="signUpForm.get('name').errors?.minlength">Atleast 3 characters</small>
+            </div>
+        </div>
+        <div class='form-row rowStyle'>
+            <label class="col-sm-3 col-form-label">Age :</label>
+            <input formControlName="age" [class.is-invalid]="signUpForm.get('age').touched && signUpForm.get('age').invalid"
+            type='number' class='form-control col-sm-9'>
+            <div class='errorDisp' *ngIf="signUpForm.get('age').errors && signUpForm.get('age').touched">
+                <small class='text-danger' *ngIf="signUpForm.get('age').errors?.required">Required and must be digits</small>
+            </div>
+        </div>
+        <div class='form-row rowStyle'>
+            <label class="col-sm-3 col-form-label">Contact No:</label>
+            <input formControlName="contactNumber" [class.is-invalid]="signUpForm.get('contactNumber').touched && signUpForm.get('contactNumber').invalid"
+            type='text' class='form-control col-sm-9'>
+             <div class='errorDisp' *ngIf="signUpForm.get('contactNumber').errors && signUpForm.get('contactNumber').touched">
+                <small class='text-danger' *ngIf="signUpForm.get('contactNumber').errors?.required">Required</small>
+                <small class='text-danger' *ngIf="signUpForm.get('contactNumber').errors?.contactNoError && !signUpForm.get('contactNumber').errors?.required">Must contain 10 digits only</small>
+            </div>
+        </div>
+        <div class='form-row'>
+            <small class='text-danger responseNote' style="margin-left: 75px;">{{signUpErrorNote}}</small>
+            <small class="text-success responseNote" style="margin-left:125px;margin-top:10px;font-size:15px">{{signUpSuccessNote}}</small>
+        </div>
+        <button type="submit">Sign-Up</button>
+    </form>
+</div>

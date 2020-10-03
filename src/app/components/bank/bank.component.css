@@ -1,0 +1,81 @@
+.navDoop{
+    background-color:rgb(9, 94, 116);
+    width:100%;
+    height:39px;
+  }
+.bankRegister{
+    border-top: 1px solid rgb(9, 94, 116);
+    border-left:1px solid rgb(9, 94, 116);
+    border-radius: 5px;
+    padding-bottom:15px;
+    background-color: white;
+    margin-top:50px;
+    margin-left:150px;
+    width:450px;
+    float:left;
+}
+.subHead{
+    background-color: rgb(0, 125, 129);
+    color:white;
+    margin-top:0px;
+    padding:5px;
+    font-size: 25px;
+}
+button{
+    float:right;
+    background: rgb(9, 94, 116);
+    color:white;
+    border:0px;
+    padding:3px;
+    margin-right:10px;
+    margin-top:10px;
+    border-radius: 2px;
+}
+
+button:hover{
+    box-shadow: 1px 2px 5px cyan;
+    border-radius: 3px;
+    padding-top:4px;
+    padding-left:4px;
+}
+.errorDisp{
+    margin-left: 150px;
+}
+
+.rowStyle{
+    padding:5px;
+}
+
+input{
+    border-top:0px;
+    border-right:0px;
+    border-left:0px;
+}
+
+#contentStyle{
+    font-size:small;
+    background-color:rgb(207, 240, 237);
+    color:black;
+    height: 200px;
+    width: 500px;
+    border-top:1px solid rgb(9, 94, 116);
+    box-shadow: 1px 1px 5px teal;
+    padding-top: 10px;
+    padding-bottom: 40px;
+    padding-left:25px;
+    padding-right:25px;
+    border-radius:3px;
+    text-align:center;
+    margin-top:125px;
+    margin-right:100px;
+    float: right;
+  }
+
+  .contectText{
+    margin-top:30px;
+    font-size: 13px;
+  }
+
+  .bold{
+    color:rgb(9, 94, 116);
+  }

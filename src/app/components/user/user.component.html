@@ -1,0 +1,67 @@
+
+<div >
+    <div class='navi'>
+        <ul class='navUl'>
+            <li  class='navLi activeElement' (click)="refresh()"><span class="material-icons">home</span>Home</li>
+            <li class='navLi'><span class="material-icons">notifications</span>Notifications</li>
+            <li class='navLi'><span class="material-icons">call_received</span>Requests</li>
+            <li class='navLi'><span class="material-icons">repeat </span>Transactions</li>
+            <li class='navLi'><span class="material-icons">account_circle</span>Contact Us</li>
+            <button class='navBtn'>Log-Out</button>
+            <button class='navBtn' (click)="onShowLenders()">Lenders</button>
+        </ul>
+    </div>
+    <div *ngIf="responseSuccessNote || responseErrorNote" class='response'>
+        <card *ngIf="responseErrorNote" class='errorResponse'>
+            {{responseNoteValue}}
+            <button (click)="onResponseCancel()" class="errorCancel">&times;</button>
+        </card>
+        <card *ngIf="responseSuccessNote" class="successResponse">
+            {{responseNoteValue}}
+            <button (click)="onResponseCancel()" class="successCancel">&times;</button>
+        </card>
+    </div>
+    <div class='container'>
+        <div class='divLeft'>
+            <div class='inviteForm'>
+                <form [formGroup]="inviteForm" class='col-sm-12' (ngSubmit)="onInviteSubmit()">
+                    <div class='form-row'>
+                        <input formControlName="mailId" type='email' class="form-control col-sm-7" placeholder="Email">
+                        <button type="submit" class="col-sm-2 button" id="inviteButton">Invite</button>
+                    </div>
+                    <div *ngIf="inviteForm.get('mailId').errors && inviteForm.get('mailId').touched">
+                        <small class='text-danger' *ngIf="inviteForm.get('mailId').errors.required">Required</small>
+                        <small class='text-danger' *ngIf="inviteForm.get('mailId').errors.emailError && !inviteForm.get('mailId').errors.required">Must be an Mail Id</small>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class='divRight'>
+            <h3>{{user?.name?.toUpperCase()}}</h3>
+            <div class="userDetails col-12">
+                <span class='field col-4'>UserName :</span><span class='value'>{{user?.username}}</span>
+                <br />
+                <span class='field col-4'>Contact No :</span><span class='value'>{{user?.contactNumber}}</span>
+                <br />
+                <span class='field col-4'>Age :</span><span class='value'>{{user?.age}}</span>
+            </div>
+            <div class='buttonSection'>
+                <button class='button'>Update Self Details</button>    
+            </div>  
+            <hr />
+            <div class="bankDetails col-12">
+                <span class='field col-4'>Account No :</span><span class='value'>{{bank?.accountNumber}}</span>
+                <br />
+                <span class='field col-4'>Bank Name :</span><span class='value'>{{bank?.bankName}}</span>
+                <br />  
+                <span class='field col-4'>Branch :</span><span class='value'>{{bank?.branch}}</span>
+                <br />  
+                <span class='field col-4'>IFSC Code :</span><span class='value'>{{bank?.ifscCode}}</span>
+            </div> 
+            <div class='buttonSection'>
+                <button class='button' (click)="doUpdateBankDetails()">Update Bank Details</button>  
+            </div>  
+        </div>
+    </div>
+</div>
+

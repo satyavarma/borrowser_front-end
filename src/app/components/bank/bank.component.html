@@ -1,0 +1,60 @@
+<div class='navDoop'></div>
+<div>
+    <div class='bankRegister'>
+        <p class="subHead"><b>Bank Details Registering Form</b></p>
+        <form class='col-sm-12' [formGroup]="bankRegisterForm" (ngSubmit)='onBankRegisterFormSubmit()'>
+            <div class='form-row rowStyle'>
+                <label class='col-sm-3 col-form-label'>Account No:</label>
+                <input class='form-control col-sm-9' type="text" formControlName = "accountNumber"
+                [class.is-invalid]="bankRegisterForm.get('accountNumber').touched && bankRegisterForm.get('accountNumber').invalid">
+                <div class='errorDisp' *ngIf="bankRegisterForm.get('accountNumber').invalid && bankRegisterForm.get('accountNumber').touched" >
+                    <small class='text-danger' *ngIf="bankRegisterForm.get('accountNumber').errors?.required">Required</small>
+                    <small class='text-danger' *ngIf="bankRegisterForm.get('accountNumber').errors?.bankAccountNoError
+                    && !bankRegisterForm.get('accountNumber').errors?.required">Account Number must contain 9-18 digits only</small>
+                </div>
+            </div>
+            <div class='form-row rowStyle'>
+                <label class='col-sm-3 col-form-label'>Bank Name:</label>
+                <input required [class.is-invalid]="bankRegisterForm.get('bankName').touched && bankRegisterForm.get('bankName').invalid" 
+                class='form-control col-sm-9' type="text" formControlName="bankName">
+                <div class='errorDisp' *ngIf="bankRegisterForm.get('bankName').invalid && bankRegisterForm.get('bankName').touched" >
+                    <small class='text-danger' *ngIf="bankRegisterForm.get('bankName').errors?.required">Required</small>
+                </div>
+            </div>
+            <div class='form-row rowStyle'>
+                <label  class='col-sm-3 col-form-label' >Branch:</label>
+                <input type="text" [class.is-invalid]="bankRegisterForm.get('branch').touched && bankRegisterForm.get('branch').invalid"
+                 class='form-control col-sm-9' type="text" formControlName="branch">
+                <div class='errorDisp' *ngIf="bankRegisterForm.get('branch').errors && bankRegisterForm.get('branch').touched" >
+                    <small class='text-danger' *ngIf="bankRegisterForm.get('branch').errors.required">Required</small>
+                </div>
+            </div>
+            <div class='form-row rowStyle'>
+                <label class='col-sm-3 col-form-label'>IFSC Code:</label>
+                <input class='form-control col-sm-9' type="text" formControlName="ifscCode"
+                [class.is-invalid]="bankRegisterForm.get('ifscCode').touched && bankRegisterForm.get('ifscCode').invalid">
+                <div class='errorDisp' *ngIf="bankRegisterForm.get('ifscCode').errors && bankRegisterForm.get('ifscCode').touched" >
+                    <small class='text-danger' *ngIf="bankRegisterForm.get('ifscCode').errors.required">Required</small>
+                </div>
+            </div>
+            <div class='form-row'>
+                <small class='text-danger' style="margin-left: 75px;">{{bankAddErrorNote}}</small>
+                <small class="text-success" style="margin-left:125px;margin-top:10px;font-size:15px">{{bankAddSuccessNote}}</small>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div id="contentStyle">
+        <div class='contectText'>
+            <i>
+                <p>               
+                     Every user has to link their bank account with there <b class='bold'>Borrowser</b> account.
+                </p>
+                <p>
+                    Once you registered the bank account properly, You are automatically navigated to your Borrowser <b class='bold'>USER</b> account.
+                </p>
+            </i>
+        </div>
+    </div>
+</div>
+

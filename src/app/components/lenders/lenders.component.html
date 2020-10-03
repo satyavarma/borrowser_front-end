@@ -1,0 +1,154 @@
+<style>
+    .navUl{ 
+        padding-left:50px;
+        width:100%;
+        background-color: rgb(9, 94, 116);
+    }
+    .navLi{
+        display:inline-block;
+        padding:5px;
+        padding-right:50px;
+        color:white;
+        font-size: small;
+    }
+    .navLi:hover{
+        color:black;
+        background-color:rgb(131, 185, 199);
+        cursor:pointer;
+    }
+    .navBtn{
+        float:right;
+        border:0px;
+        background-color:rgb(241, 88, 32);
+        color:white;
+        padding:1px;
+        padding-left:10px;
+        padding-right:10px;
+        border-radius:3px;
+        margin-right:20px;
+        margin-top:5px;
+    }
+    .navBtn:hover{
+        box-shadow:2px 3px 5px red;
+    }
+    .lenders{
+        background-color: white;
+        box-shadow:2px 2px 2px gray;
+        margin-top:50px;
+    }
+    .lenderContactNumber{
+        float:right;
+        text-align: center;
+    }
+    .lenderButton{
+        width:100px;
+        border-radius:5px;
+        border:0px;
+        padding:2px;
+        background-color:teal;
+        color:white;
+    }
+    .lenderButton:hover{
+        box-shadow:2px 2px 2px #36eb9f;
+    }
+    .lenderRequest{
+        float:right;
+        align-content: center;
+        text-align:center;
+    }
+    .lenderContactNumber{
+        float:right;
+        text-align:center;
+    }
+    .lenderUsername{
+        text-align:center;
+        float:right;
+    }
+    .lenderName{
+        float:right;
+        text-align:center;
+    }
+    .lenderSNo{
+        text-align:center;
+    }
+    .errorResponse{
+        padding:10px;
+        padding-top:12px;
+        padding-bottom:15px;
+        border-radius:4px;
+        color:maroon;
+        background-color:lightpink;
+    }
+    .errorCancel{
+        border:0px;
+        background-color:lightpink;
+        color:maroon;
+    }
+    .successCancel{
+        border:0px;
+        background-color:rgb(107, 221, 178);
+        color:rgb(2, 59, 59);;
+    }
+    .successResponse{
+        padding:10px;
+        padding-top:12px;
+        padding-bottom:15px;
+        border-radius:4px;
+        color:rgb(2, 59, 59);
+        background-color: rgb(107, 221, 178);
+    }
+    .response{
+        display: absolute;
+        float:right;
+        margin-top:0px;
+        margin-right:20px;
+    }
+</style>
+<div >
+    <div class='navi'>
+        <ul class='navUl'>
+            <li class='navLi' (click)='navigateNav("user")'><span class="material-icons">home</span>Home</li>
+            <li class='navLi'><span class="material-icons">notifications</span>Notifications</li>
+            <li class='navLi'><span class="material-icons">call_received</span>Requests</li>
+            <li class='navLi'><span class="material-icons">repeat </span>Transactions</li>
+            <li class='navLi'><span class="material-icons">account_circle</span>Contact Us</li>
+            <button class='navBtn'>Log-Out</button>
+            <button class='navBtn' (click)="refresh()">Lenders</button>
+        </ul>
+    </div>
+    <div *ngIf="responseSuccessNote || responseErrorNote" class='response'>
+        <card *ngIf="responseErrorNote" class='errorResponse'>
+            {{responseNoteValue}}
+            <button (click)="onResponseCancel()" class="errorCancel">&times;</button>
+        </card>
+        <card *ngIf="responseSuccessNote" class="successResponse">
+            {{responseNoteValue}}
+            <button (click)="onResponseCancel()" class="successCancel">&times;</button>
+        </card>
+    </div>
+    <div class='container'>
+        <div class='lenders'>
+            <ul class='lendersList' style="list-style-type: none;">
+                <li class='col col-12'>
+                    <b>
+                        <hr />
+                        <span class='lenderSNo col-1'>S.No</span>
+                        <span class='lenderRequest col-2'>Request</span>
+                        <span class='lenderContactNumber col-3'>Contact No</span>
+                        <span class='lenderUsername col-3'>Email-Id</span>
+                        <span class='lenderName col-3'>Name</span>
+                        <hr />
+                    </b>
+                </li>
+                <li *ngFor="let lender of lenders; let i=index"  class='col col-md-12'>
+                    <span class='lenderSNo col-1'>{{i+1}}</span>
+                    <span class='lenderRequest  col-2'><button class=lenderButton>Request</button></span>
+                    <span class='lenderContactNumber  col-3'>{{lender?.contactNumber}}</span>
+                    <span class='lenderUsername  col-3'>{{lender?.username}}</span>
+                    <span class='lenderName col-3'>{{lender?.name}}</span>
+                    <hr />
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
