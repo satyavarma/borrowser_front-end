@@ -1,0 +1,152 @@
+<style>
+    .navUl{ 
+        padding-left:50px;
+        width:100%;
+        background-color: rgb(9, 94, 116);
+    }
+    .navLi{
+        display:inline-block;
+        padding:5px;
+        padding-right:50px;
+        color:white;
+        font-size: small;
+    }
+    .navLi:hover{
+        color:black;
+        background-color:rgb(131, 185, 199);
+        cursor:pointer;
+    }
+    .navBtn{
+        float:right;
+        border:0px;
+        background-color:rgb(241, 88, 32);
+        color:white;
+        padding:1px;
+        padding-left:10px;
+        padding-right:10px;
+        border-radius:3px;
+        margin-right:20px;
+        margin-top:5px;
+    }
+    .navBtn:hover{
+        box-shadow:2px 3px 5px red;
+    }
+    .activeElement:hover{
+        color:white;
+        background-color:teal;
+        cursor:pointer;
+    }
+    .activeElement{
+        color:white;
+        background-color:teal;
+        cursor:pointer;
+    }
+    .errorResponse{
+        padding:10px;
+        padding-top:12px;
+        padding-bottom:15px;
+        border-radius:4px;
+        color:maroon;
+        background-color:lightpink;
+    }
+    .errorCancel{
+        border:0px;
+        background-color:lightpink;
+        color:maroon;
+    }
+    .successCancel{
+        border:0px;
+        background-color:rgb(107, 221, 178);
+        color:rgb(2, 59, 59);;
+    }
+    .successResponse{
+        padding:10px;
+        padding-top:12px;
+        padding-bottom:15px;
+        border-radius:4px;
+        color:rgb(2, 59, 59);
+        background-color: rgb(107, 221, 178);
+    }
+    .response{
+        display: absolute;
+        float:right;
+        margin-top:0px;
+        margin-right:20px;
+    }
+    .requests{
+        background-color: white;
+        box-shadow:2px 2px 2px gray;
+        margin-top:50px;
+    }
+    .requestStatus{
+        float:right;
+        align-content: center;
+        text-align:center;
+    }
+    .requestTenure{
+        float:right;
+        text-align:center;
+    }
+    .requestAmount{
+        text-align:center;
+        float:right;
+    }
+    .requestName{
+        float:right;
+        text-align:center;
+    }
+    .requestSNo{
+        text-align:center;
+    }
+    .scroll { 
+        height: 375px; 
+        overflow-x: hidden; 
+        overflow-y: auto; 
+        text-align:justify; 
+    }
+    .notificationHeader{
+        padding:20px;
+    }
+    .notificationDescription{
+        padding:20px;
+    }
+</style>
+<div >
+    <div class='navi'>
+        <ul class='navUl'>
+            <li class='navLi' (click)='navigateNav("user")'><span class="material-icons">home</span>Home</li>
+            <li class='navLi' (click)='navigateNav("sentRequests")'><span class="material-icons">call_made</span>Sent Requests</li>
+            <li class='navLi' (click)='navigateNav("receivedRequests")' ><span class="material-icons">call_received</span>Received Requests</li>
+            <li class='navLi' (click)='navigateNav("transactions")'><span class="material-icons">repeat </span>Transactions</li>
+            <li class='navLi activeElement' (click)="refresh()"><span class="material-icons">notifications</span>Notifications</li>
+            <button class='navBtn' (click)="onLogout()">Log-Out</button>
+            <button class='navBtn' (click)='navigateNav("lenders")' >Lenders</button>
+        </ul>
+    </div>
+    <div *ngIf="responseSuccessNote || responseErrorNote" class='response'>
+        <card *ngIf="responseErrorNote" class='errorResponse'>
+            {{responseNoteValue}}
+            <button (click)="onResponseCancel()" class="errorCancel">&times;</button>
+        </card>
+        <card *ngIf="responseSuccessNote" class="successResponse">
+            {{responseNoteValue}}
+            <button (click)="onResponseCancel()" class="successCancel">&times;</button>
+        </card>
+    </div>
+    <div class='container'>
+        <div class='requests'>
+            <br />
+            <p style="text-align:center;color:teal;"><b>Rejected Notifications</b></p>
+            <hr />
+            <ul class="scroll" style="list-style-type: none;">
+                <li *ngFor="let request of sentRequests; let i=index"  class='col col-md-12'>
+                    <div class='notification' *ngIf="request?.requestStatus == 3">
+                        <b class='text-danger notificationHeader'>Rejected</b>
+                        <small>{{request?.lenderName.toUpperCase()}} rejected your request of amount {{request?.loanAmount}}</small>
+                    </div>
+                    <hr />
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

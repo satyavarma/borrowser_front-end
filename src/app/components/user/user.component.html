@@ -3,12 +3,12 @@
     <div class='navi'>
         <ul class='navUl'>
             <li  class='navLi activeElement' (click)="refresh()"><span class="material-icons">home</span>Home</li>
-            <li class='navLi'><span class="material-icons">notifications</span>Notifications</li>
-            <li class='navLi'><span class="material-icons">call_received</span>Requests</li>
-            <li class='navLi'><span class="material-icons">repeat </span>Transactions</li>
-            <li class='navLi'><span class="material-icons">account_circle</span>Contact Us</li>
-            <button class='navBtn'>Log-Out</button>
-            <button class='navBtn' (click)="onShowLenders()">Lenders</button>
+            <li class='navLi' (click)='navigateNav("sentRequests")'><span class="material-icons">call_made</span>Sent Requests</li>
+            <li class='navLi' (click)='navigateNav("receivedRequests")'><span class="material-icons">call_received</span>Received Requests</li>
+            <li class='navLi' (click)='navigateNav("transactions")'><span class="material-icons">repeat </span>Transactions</li>
+            <li class='navLi' (click)='navigateNav("notifications")'><span class="material-icons">notifications</span>Notifications</li>
+            <button class='navBtn' (click)="onLogout()">Log-Out</button>
+            <button class='navBtn' (click)='navigateNav("lenders")'>Lenders</button>
         </ul>
     </div>
     <div *ngIf="responseSuccessNote || responseErrorNote" class='response'>
@@ -45,9 +45,11 @@
                 <br />
                 <span class='field col-4'>Age :</span><span class='value'>{{user?.age}}</span>
             </div>
+            <!--
             <div class='buttonSection'>
                 <button class='button'>Update Self Details</button>    
             </div>  
+            -->
             <hr />
             <div class="bankDetails col-12">
                 <span class='field col-4'>Account No :</span><span class='value'>{{bank?.accountNumber}}</span>

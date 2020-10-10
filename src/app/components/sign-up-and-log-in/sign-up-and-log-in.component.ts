@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SignUpUserModel } from '../../models/sign-up-user-model';
-import { LogInUserModel } from '../../models/log-in-user-model';
 import { UserService } from '../../services/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -14,7 +12,6 @@ import { contactNoValidator } from '../../share/contactNo.validator'
 })
 export class SignUpAndLogInComponent implements OnInit {
 
-  public signUpUserModel:SignUpUserModel = {};
   public signUpErrorNote:string;
   public signUpSuccessNote:String;
   public logInErrorNote:string;
@@ -23,6 +20,10 @@ export class SignUpAndLogInComponent implements OnInit {
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    let signedUserId:string = localStorage.getItem('signedUserId') ? localStorage.getItem('signedUserId') : '0' ;
+    if(parseInt(signedUserId) != 0){
+      this.router.navigate(['/user', signedUserId],{relativeTo:this.route});
+    }
     this.logInForm = this.fb.group({
       username:['',[Validators.required, emailValidator]],
       password:['',[Validators.required]]
@@ -53,6 +54,9 @@ export class SignUpAndLogInComponent implements OnInit {
             else if(result["statusCodeValue"] == 200){
               let userId = result["body"]["userId"];
               let bankId = result["body"]["bankId"];
+              localStorage.setItem('signedUserId', JSON.stringify(userId));
+              let date = new Date();
+              localStorage.setItem('signedDate',date.toString());
               if(bankId == 6){
                 this.router.navigate(['/bank',userId],{relativeTo:this.route});
               }

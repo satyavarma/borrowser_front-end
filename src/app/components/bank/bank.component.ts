@@ -23,6 +23,7 @@ export class BankComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap)=>{
       this.userId = parseInt(params.get("userId"));
     });
+
     this.bankRegisterForm = this.fb.group({
       accountNumber:['',[Validators.required,bankAccountValidator]],
       bankName:['',[Validators.required]],

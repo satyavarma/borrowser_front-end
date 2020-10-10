@@ -1,0 +1,343 @@
+<style>
+    .navUl{ 
+        padding-left:50px;
+        width:100%;
+        background-color: rgb(9, 94, 116);
+    }
+    .navLi{
+        display:inline-block;
+        padding:5px;
+        padding-right:50px;
+        color:white;
+        font-size: small;
+    }
+    .navLi:hover{
+        color:black;
+        background-color:rgb(131, 185, 199);
+        cursor:pointer;
+    }
+    .navBtn{
+        float:right;
+        border:0px;
+        background-color:rgb(241, 88, 32);
+        color:white;
+        padding:1px;
+        padding-left:10px;
+        padding-right:10px;
+        border-radius:3px;
+        margin-right:20px;
+        margin-top:5px;
+    }
+    .navBtn:hover{
+        box-shadow:2px 3px 5px red;
+    }
+    .activeElement:hover{
+        color:white;
+        background-color:teal;
+        cursor:pointer;
+    }
+    .activeElement{
+        color:white;
+        background-color:teal;
+        cursor:pointer;
+    }
+    .buttonGroup{
+       padding:0px;
+       margin-top:50px;
+    }
+    .toggleClicked{
+        background-color: rgb(42, 65, 100);
+        color:white;
+        padding:5px;
+        border:0px;
+    }
+    .toggleUnClicked{
+        background-color: rgb(42, 65, 100) ;
+        opacity:0.8;
+        color:white;
+        padding:5px;
+        border:0px;
+    }
+    .toggleUnClicked:hover{
+        color: rgb(201, 198, 36);
+    }
+    .errorResponse{
+        padding:10px;
+        padding-top:12px;
+        padding-bottom:15px;
+        border-radius:4px;
+        color:maroon;
+        background-color:lightpink;
+    }
+    .errorCancel{
+        border:0px;
+        background-color:lightpink;
+        color:maroon;
+    }
+    .successCancel{
+        border:0px;
+        background-color:rgb(107, 221, 178);
+        color:rgb(2, 59, 59);;
+    }
+    .successResponse{
+        padding:10px;
+        padding-top:12px;
+        padding-bottom:15px;
+        border-radius:4px;
+        color:rgb(2, 59, 59);
+        background-color: rgb(107, 221, 178);
+    }
+    .response{
+        display: absolute;
+        float:right;
+        margin-top:0px;
+        margin-right:20px;
+    }
+    .transactions{
+        background-color: white;
+        box-shadow:2px 2px 2px gray;
+        margin-top:0px;
+    }
+    .transactionStatus{
+        float:right;
+        align-content: center;
+        text-align:center;
+    }
+    .transactionTenure{
+        float:right;
+        text-align:center;
+    }
+    .transactionAmount{
+        text-align:center;
+        float:right;
+    }
+    .transactionName{
+        float:right;
+        text-align:center;
+    }
+    .transactionSNo{
+        text-align:center;
+    }
+    .repayButton{
+        border-radius:3px;
+        border:0px;
+        padding:2px;
+        background-color:teal;
+        color:white;
+        margin:10px;
+    }
+    .repayButton:hover{
+        box-shadow:2px 2px 2px #36eb9f;
+    }
+    .modal-header{
+        background-color: teal;
+        border-radius: 2px;
+        color:white;
+        margin-top:0px;
+        padding:5px;
+        font-size: 25px;
+    }
+    .modal-crossButton{
+        border:0px;
+        background-color:teal;
+        color:rgb(253, 253, 253);
+    }
+    .modal-crossButton:hover{
+        color:rgb(221, 29, 29);
+        border-radius:5px;
+    }
+    .fixedData{
+        padding:15px;
+    }
+    .modalSubmit{
+        float:right;
+        background:rgb(9, 94, 116);
+        color:white;
+        border:0px;
+        padding:3px;
+        margin-right:10px;
+        margin-top:10px;
+        margin-bottom: 10px;
+        border-radius: 2px;
+    }
+    .modalSubmit:hover{
+        box-shadow: 1px 2px 5px cyan;
+        border-radius: 3px;
+        padding-top:4px;
+        padding-left:4px;
+    }
+    .repaySubBox{
+        border:1px solid rgb(147, 175, 175);
+        padding:5px;
+        background-color: rgb(212, 250, 250);
+    }
+    .scroll { 
+        height: 375px; 
+        overflow-x: hidden; 
+        overflow-y: auto; 
+        text-align:justify; 
+    }
+</style>
+<div >
+    <div class='navi'>
+        <ul class='navUl'>
+            <li class='navLi' (click)='navigateNav("user")'><span class="material-icons">home</span>Home</li>
+            <li class='navLi' (click)='navigateNav("sentRequests")'><span class="material-icons">call_made</span>Sent Requests</li>
+            <li class='navLi' (click)='navigateNav("receivedRequests")'><span class="material-icons">call_received</span>Received Requests</li>
+            <li class='navLi activeElement' (click)='refresh()'><span class="material-icons">repeat </span>Transactions</li>
+            <li class='navLi' (click)='navigateNav("notifications")'><span class="material-icons">notifications</span>Notifications</li>
+            <button class='navBtn'  (click)="onLogout()">Log-Out</button>
+            <button class='navBtn' (click)='navigateNav("lenders")' >Lenders</button>
+        </ul>
+    </div>
+    <div *ngIf="responseSuccessNote || responseErrorNote" class='response'>
+        <card *ngIf="responseErrorNote" class='errorResponse'>
+            {{responseNoteValue}}
+            <button (click)="onResponseCancel()" class="errorCancel">&times;</button>
+        </card>
+        <card *ngIf="responseSuccessNote" class="successResponse">
+            {{responseNoteValue}}
+            <button (click)="onResponseCancel()" class="successCancel">&times;</button>
+        </card>
+    </div>
+    <div class='container'>
+        <div class='buttonGroup col-12'>
+            <b>
+                <button class='col-6' [class.toggleClicked]="classBorrow" [class.toggleUnClicked]="classLend" (click)="onShowBorrowed()">Borrowed Transactions</button>
+                <button class='col-6' [class.toggleClicked]="classLend" [class.toggleUnClicked]="classBorrow" (click)="onShowLended()">Lended Transactions</button>
+            </b>
+        </div>
+        <div *ngIf="classLend" class='transactions'>
+            <ul class='transactionsList' style="list-style-type: none;">
+                <div class="scroll">
+                    <br />
+                    <li class='col col-12'>
+                        <b>
+                            <span class='transactionSNo col-1'>S.No</span>
+                            <span class='transactionStatus col-4'>Status</span>
+                            <span class='transactionTenure col-2'>Tenure</span>
+                            <span class='transactionAmount col-2'>Amount</span>
+                            <span class='transactionName col-3'>Name</span>
+                            <hr />
+                        </b>
+                    </li>
+                    <li *ngFor="let transaction of lendedTransactions; let i=index"  class='col col-md-12'>
+                        <span class='transactionSNo col-1'>{{i+1}}</span>
+                        <span class='transactionStatus  col-4'>
+                            <span>
+                                <span *ngIf="transaction.requestStatus == 5" class='text-danger'><b>Repaid</b></span>
+                                <span *ngIf="transaction.requestStatus == 4" class='text-primary'><b>Repay Requested</b></span>
+                                <span *ngIf="transaction.requestStatus == 2" class='text-success'>
+                                    <b>Paid</b>
+                                    <button class='repayButton' (click)="onRequestRepay(transaction)">Request Repay</button>
+                                </span>
+                            </span>
+                        </span>
+                        <span class='transactionTenure  col-2'>{{transaction?.tenure}}<small> (months)</small></span>
+                        <span class='transactionAmount  col-2'><span>&#x20B9;</span>{{transaction?.loanAmount}}/-</span>
+                        <span class='transactionName col-3'>{{transaction?.borrowerName}}</span>
+                         <hr />
+                    </li>
+                </div>
+            </ul>
+        </div>
+        <div *ngIf="classBorrow" class='transactions'>
+            <ul class='transactionsList' style="list-style-type: none;">
+                <div class="scroll">
+                    <br />
+                    <li class='col col-12'>
+                        <b>
+                            <span class='transactionSNo col-1'>S.No</span>
+                            <span class='transactionStatus col-4'>Status</span>
+                            <span class='transactionTenure col-2'>Tenure</span>
+                            <span class='transactionAmount col-2'>Amount</span>
+                            <span class='transactionName col-3'>Name</span>
+                            <hr />
+                        </b>
+                    </li>
+                    <li *ngFor="let transaction of borrowedTransactions; let i=index"  class='col col-md-12'>
+                        <span class='transactionSNo col-1'>{{i+1}}</span>
+                        <span class='transactionStatus  col-4'>
+                            <span>
+                                <span *ngIf="transaction.requestStatus == 5" class='text-danger'><b>Repaid</b></span>
+                                <span *ngIf="transaction.requestStatus == 4" class='text-primary'>
+                                    <b>Repay Requested</b>
+                                    <button class='repayButton'  (click)="onRepayDialog(transaction,repayTemplate)">Repay</button>
+                                </span>
+                                <span *ngIf="transaction.requestStatus == 2" class='text-success'>
+                                    <b>Paid</b>
+                                    <button class='repayButton' (click)="onRepayDialog(transaction,repayTemplate)">Repay</button>
+                                </span>
+                            </span>
+                        </span>
+                        <span class='transactionTenure  col-2'>{{transaction?.tenure}}<small> (months)</small></span>
+                        <span class='transactionAmount  col-2'><span>&#x20B9;</span>{{transaction?.loanAmount}}/-</span>
+                        <span class='transactionName col-3'>{{transaction?.lenderName}}</span>
+                         <hr />
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+    <ng-template #repayTemplate>
+        <div>
+            <div class='modal-header'>
+                <h3 class='modal-headingText'><b>Repay Confirmation</b></h3>
+                <button (click)="modalRef.hide()" class='modal-crossButton'><b>&times;</b></button>
+            </div>
+            <div class='fixedData'>
+                <b>To:</b>
+                <br />
+                <br />
+                <div class='repaySubBox'>
+                    <span>
+                        <span class=' col-sm-7'>{{repayRequest?.lenderName.toUpperCase()}}</span>
+                    </span>
+                    <br />
+                    <span>
+                        <span class=' col-sm-7'>xxxxxx{{lenderBank?.accountNumber.slice(-4)}}</span>
+                    </span>
+                    <br />
+                    <span>
+                        <span class=' col-sm-7'>{{lenderBank?.bankName}}, {{lenderBank?.branch}}</span>
+                    </span>
+                    <br />
+                    <span>
+                        <span class=' col-sm-7'>{{lenderBank?.ifscCode}}</span>
+                    </span>
+                </div>
+                <br />
+                <b>Loan Details</b>
+                <br />
+                <br />
+                <div class="repaySubBox">
+                    <span>
+                        <span class='col-sm-5'>Amount Borrowed: </span><span class=' col-sm-7'><span>&#x20B9;</span>{{repayRequest?.loanAmount}}/-</span>
+                    </span>
+                    <br />
+                    <span>
+                        <span class='col-sm-5'>Requested Tenure: </span><b class=' col-sm-7'>{{repayRequest?.tenure}}</b><small>(months)</small>
+                    </span>
+                    <br />
+                </div>
+                <br />
+                <div class="repaySubBox">
+                    <span>
+                        <span class='col-sm-5'>Interest: </span><span class=' col-sm-7'><span>&#x20B9;</span>{{calculateInterest(repayRequest?.loanAmount,repayRequest?.tenure,repayRequest?.loanAcceptedDate)}}/-</span>
+                    </span>
+                    <br />
+                    <span>
+                        <span class='col-sm-5'>penalty: </span><span class=' col-sm-7'><span>&#x20B9;</span>{{fine}}/-</span>
+                    </span>
+                </div>
+                <br />
+                <div class="repaySubBox">
+                    <span class='col-sm-5'>Total Amount: </span><span class=' col-sm-7'><span>&#x20B9;</span>{{totalAmount}}/-</span>
+                </div>
+               <br />
+                <button class='modalSubmit' (click)="onConfirmRepayment(repayRequest)">Repay</button>
+               <br />
+            </div>
+        </div>
+    </ng-template>
+</div>

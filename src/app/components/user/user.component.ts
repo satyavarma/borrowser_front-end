@@ -26,7 +26,27 @@ export class UserComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap)=>{
       this.userId = parseInt(params.get("userId"));
     });
-
+    let signedUserId:string = localStorage.getItem('signedUserId') ? localStorage.getItem('signedUserId') : '0' ;
+    if(parseInt(signedUserId) != this.userId){
+      localStorage.removeItem('signedUserId');
+      this.router.navigate(['../../'],{relativeTo:this.route});
+    }
+    else{
+      let std = new Date(localStorage.getItem('signedDate')); 
+      let newd = new Date();
+      let yearDiff = std.getFullYear()-newd.getFullYear();
+      let monthDiff = std.getMonth()-newd.getMonth();
+      let dateDiff = std.getDate()-newd.getDate();
+      if(yearDiff == 0 && monthDiff==0 && dateDiff<=1){
+        let date = new Date();
+        localStorage.setItem('signedDate',date.toString());
+      }
+      else{
+        localStorage.removeItem('signedUserId');
+        localStorage.removeItem('signedDate');
+        this.router.navigate(['../../'],{relativeTo:this.route});
+      }
+    }
     this.inviteForm = this.fb.group(
       {
         mailId: ['',[Validators.required, emailValidator]]
@@ -121,4 +141,12 @@ export class UserComponent implements OnInit {
     window.location.reload();
   }
 
+  navigateNav(pageName:string){
+    this.router.navigate(['../../',pageName,this.userId],{relativeTo:this.route});
+  }
+  
+  onLogout(){
+    localStorage.removeItem('signedUserId');
+    this.router.navigate(['../../'],{relativeTo:this.route})
+  }
 }
