@@ -1,4 +1,8 @@
-<div class='navDoop'></div>
+<ul class='navUl'>
+    <li class='navLi'  (click)='navigateNav("user")'><b><span>&#8377;</span>/-</b> Borrowser</li>
+    <li class='navLi' (click)="refresh()"><b> / </b> Bank</li>
+    <button class='navBtn' (click)="onLogout()">Log-Out</button>
+</ul>
 <div>
     <div class='bankRegister'>
         <p class="subHead"><b>Bank Details Registering Form</b></p>

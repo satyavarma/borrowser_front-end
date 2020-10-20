@@ -1,5 +1,5 @@
 
-<div >
+<div>
     <div class='navi'>
         <ul class='navUl'>
             <li  class='navLi activeElement' (click)="refresh()"><span class="material-icons">home</span>Home</li>
@@ -52,7 +52,7 @@
             -->
             <hr />
             <div class="bankDetails col-12">
-                <span class='field col-4'>Account No :</span><span class='value'>{{bank?.accountNumber}}</span>
+                <span class='field col-4'>Account No :</span><span class='value'>xxxxxx<small>{{bank?.accountNumber.slice(-4)}}</small></span>
                 <br />
                 <span class='field col-4'>Bank Name :</span><span class='value'>{{bank?.bankName}}</span>
                 <br />  

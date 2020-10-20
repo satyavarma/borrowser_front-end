@@ -1,7 +1,18 @@
-  .navDoop{
-    background-color:rgb(9, 94, 116);
+  .navUl{ 
+    padding-left:75px;
     width:100%;
-    height:39px;
+    background-color: rgb(9, 94, 116);
+  }
+  .navLi{
+    display:inline-block;
+    padding-bottom:10px;
+    padding-top:10px;
+    padding-right:50px;
+    color:white;
+    font-size: small;
+  }
+  .navLi:hover{
+    cursor: pointer;
   }
   #divLeft{
     float:left;

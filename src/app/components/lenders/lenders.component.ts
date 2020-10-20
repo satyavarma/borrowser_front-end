@@ -13,14 +13,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LendersComponent implements OnInit {
 
-  public responseErrorNote: boolean = false;
-  public responseSuccessNote: boolean = false;
-  public responseNoteValue: string ="";
+  responseErrorNote: boolean = false;
+  responseSuccessNote: boolean = false;
+  responseNoteValue: string ="";
   userId:number;
   requestingLender: UserModel;
   lenders: UserModel[];
+  searchedLenders:UserModel[];
+  defaultLenders:UserModel[];
   modalRef: BsModalRef;
-  public loanRequestForm: FormGroup;
+  loanRequestForm: FormGroup;
+  searchBox: FormGroup;
   LoanRequestInvalidError:string = "";
 
   constructor(private fb: FormBuilder, private modalService: BsModalService, private router: Router, private route: ActivatedRoute, private lendingService:LendingService) { }
@@ -31,8 +34,7 @@ export class LendersComponent implements OnInit {
     });
     let signedUserId:string = localStorage.getItem('signedUserId') ? localStorage.getItem('signedUserId') : '0' ;
     if(parseInt(signedUserId) != this.userId){
-      localStorage.removeItem('signedUserId');
-      this.router.navigate(['../../'],{relativeTo:this.route});
+      this.onLogout();
     }
     else{
       let std = new Date(localStorage.getItem('signedDate')); 
@@ -45,11 +47,14 @@ export class LendersComponent implements OnInit {
         localStorage.setItem('signedDate',date.toString());
       }
       else{
-        localStorage.removeItem('signedUserId');
-        localStorage.removeItem('signedDate');
-        this.router.navigate(['../../'],{relativeTo:this.route});
+        this.onLogout();
       }
     }
+
+    this.searchBox = this.fb.group({
+      name:[''],
+    });
+
     this.lendingService.getLenders(this.userId)
       .subscribe(
         data =>{
@@ -59,7 +64,8 @@ export class LendersComponent implements OnInit {
             this.responseNoteValue="Unable to get the borrowers!..";
           }
           else if(result["statusCodeValue"] == 200){
-            this.lenders = result["body"];
+            this.defaultLenders = result["body"];
+            this.lenders = this.defaultLenders;
           }
         },
         error => {
@@ -116,7 +122,45 @@ export class LendersComponent implements OnInit {
       );
     }
   }
+  onSearchSubmit(){
+    this.responseErrorNote = false;
+    this.responseSuccessNote = false;
+    this.responseNoteValue = "";
+    if(this.searchBox.value.name == null || this.searchBox.value.name == ""){
+      this.lenders = this.defaultLenders;
+    }
+    else{
+      this.lendingService.getLendersBySearchName(this.userId,this.searchBox.value.name)
+      .subscribe(
+        data =>{
+          let result = data;
+          if(result["statusCodeValue"] == 404){
+            this.responseErrorNote=true;
+            this.responseNoteValue=this.searchBox.value.name+" not found..";
+            this.searchBox.reset();
+          }
+          else if(result["statusCodeValue"] == 200){
+            this.searchedLenders = result["body"];
+            this.lenders = this.searchedLenders;
+          }
+        },
+        error => {
+          this.responseErrorNote=true;
+          this.responseNoteValue="Something went Wrong!..";
+          console.log('error:',error);
+        }
+      );
+    }
+  }
 
+  onShowAll(){
+    this.responseErrorNote = false;
+    this.responseSuccessNote = false;
+    this.responseNoteValue = "";
+    this.searchBox.reset();
+    this.searchedLenders=[];
+    this.lenders=this.defaultLenders;
+  }
   onResponseCancel(){
     this.responseErrorNote = false;
     this.responseSuccessNote = false;
@@ -129,6 +173,7 @@ export class LendersComponent implements OnInit {
 
   onLogout(){
     localStorage.removeItem('signedUserId');
+    localStorage.removeItem('signedDate');
     this.router.navigate(['../../'],{relativeTo:this.route})
   }
 

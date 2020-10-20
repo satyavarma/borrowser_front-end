@@ -1,165 +1,4 @@
-<style>
-    .navUl{ 
-        padding-left:50px;
-        width:100%;
-        background-color: rgb(9, 94, 116);
-    }
-    .navLi{
-        display:inline-block;
-        padding:5px;
-        padding-right:50px;
-        color:white;
-        font-size: small;
-    }
-    .navLi:hover{
-        color:black;
-        background-color:rgb(131, 185, 199);
-        cursor:pointer;
-    }
-    .navBtn{
-        float:right;
-        border:0px;
-        background-color:rgb(241, 88, 32);
-        color:white;
-        padding:1px;
-        padding-left:10px;
-        padding-right:10px;
-        border-radius:3px;
-        margin-right:20px;
-        margin-top:5px;
-    }
-    .navBtn:hover{
-        box-shadow:2px 3px 5px red;
-    }
-    .lenders{
-        background-color: white;
-        box-shadow:2px 2px 2px gray;
-        margin-top:50px;
-    }
-    .lenderContactNumber{
-        float:right;
-        text-align: center;
-    }
-    .lenderButton{
-        width:100px;
-        border-radius:5px;
-        border:0px;
-        padding:2px;
-        background-color:teal;
-        color:white;
-    }
-    .lenderButton:hover{
-        box-shadow:2px 2px 2px #36eb9f;
-    }
-    .lenderRequest{
-        float:right;
-        align-content: center;
-        text-align:center;
-    }
-    .lenderContactNumber{
-        float:right;
-        text-align:center;
-    }
-    .lenderUsername{
-        text-align:center;
-        float:right;
-    }
-    .lenderName{
-        float:right;
-        text-align:center;
-    }
-    .lenderSNo{
-        text-align:center;
-    }
-    .errorResponse{
-        padding:10px;
-        padding-top:12px;
-        padding-bottom:15px;
-        border-radius:4px;
-        color:maroon;
-        background-color:lightpink;
-    }
-    .errorCancel{
-        border:0px;
-        background-color:lightpink;
-        color:maroon;
-    }
-    .successCancel{
-        border:0px;
-        background-color:rgb(107, 221, 178);
-        color:rgb(2, 59, 59);;
-    }
-    .successResponse{
-        padding:10px;
-        padding-top:12px;
-        padding-bottom:15px;
-        border-radius:4px;
-        color:rgb(2, 59, 59);
-        background-color: rgb(107, 221, 178);
-    }
-    .response{
-        display: absolute;
-        float:right;
-        margin-top:0px;
-        margin-right:20px;
-    }
-    .modal-header{
-        background-color: teal;
-        border-radius: 2px;
-        color:white;
-        margin-top:0px;
-        padding:5px;
-        font-size: 25px;
-    }
-    .modalSubmit{
-        float:right;
-        background:rgb(9, 94, 116);
-        color:white;
-        border:0px;
-        padding:3px;
-        margin-right:10px;
-        margin-top:10px;
-        margin-bottom: 10px;
-        border-radius: 2px;
-    }
-    .modalSubmit:hover{
-        box-shadow: 1px 2px 5px cyan;
-        border-radius: 3px;
-        padding-top:4px;
-        padding-left:4px;
-    }
-    .modal-crossButton{
-        border:0px;
-        background-color:teal;
-        color:rgb(253, 253, 253);
-    }
-    .modal-crossButton:hover{
-        color:rgb(221, 29, 29);
-        border-radius:5px;
-    }
-    .errorDisp{
-        margin-left: 120px;
-    }
 
-    .rowStyle{
-        padding:5px;
-    }
-
-    input{
-        border-top:0px;
-        border-right:0px;
-        border-left:0px;
-    }
-    .fixedData{
-        padding:15px;
-    }
-    .scroll { 
-        height: 400px; 
-        overflow-x: hidden; 
-        overflow-y: auto; 
-        text-align:justify; 
-    } 
-</style>
 <div >
     <div class='navi'>
         <ul class='navUl'>
@@ -185,26 +24,39 @@
     <div class='container'>
         <div class='lenders'>
             <ul class='lendersList' style="list-style-type: none;">
-                <div class='scroll'>
+                <div >
                     <br />
-                    <li class='col col-12'>
+                    <div class="search">
+                        <form class="col-12" [formGroup]="searchBox" (ngSubmit)="onSearchSubmit()">
+                            <div class='form-row rowStyle'>
+                                <input formControlName="name" type='text' class='form-control requestInput col-sm-3' placeholder="Search by name..">                
+                                <button type="submit" class='searchBtn'>Search</button>
+                                <button class='showAllBtn' (click)="onShowAll()">Show All</button>
+                            </div>
+                        </form>
+                    </div>
+                    <hr />
+                    <div class='col col-12'>
                         <b>
                             <span class='lenderSNo col-1'>S.No</span>
-                            <span class='lenderRequest col-2'>Request</span>
-                            <span class='lenderContactNumber col-3'>Contact No</span>
-                            <span class='lenderUsername col-3'>Email-Id</span>
-                            <span class='lenderName col-3'>Name</span>
+                            <span class='lenderRequest col-3'>Request</span>
+                            <!--<span class='lenderContactNumber col-3'>Contact No</span>-->
+                            <span class='lenderUsername col-4'>Email-Id</span>
+                            <span class='lenderName col-4'>Name</span>
                             <hr />
                         </b>
-                    </li>
-                    <li *ngFor="let lender of lenders; let i=index"  class='col col-md-12'>
-                        <span class='lenderSNo col-1'>{{i+1}}</span>
-                        <span class='lenderRequest  col-2'><button class=lenderButton (click)="openModalForLoan(lender,template)">Request</button></span>
-                        <span class='lenderContactNumber  col-3'>{{lender?.contactNumber}}</span>
-                        <span class='lenderUsername  col-3'>{{lender?.username}}</span>
-                        <span class='lenderName col-3'>{{lender?.name}}</span>
-                        <hr />
-                    </li>
+                    </div>
+                    <div class='scroll'>
+                        <li *ngFor="let lender of lenders; let i=index"  class='col col-md-12'>
+                            <span class='lenderSNo col-1'>{{i+1}}</span>
+                            <span class='lenderRequest  col-3'><button class=lenderButton (click)="openModalForLoan(lender,template)">Request</button></span>
+                            <!--<span class='lenderContactNumber  col-3'>{{lender?.contactNumber}}</span>-->
+                            <span class='lenderUsername  col-4'>{{lender?.username}}</span>
+                            <span class='lenderName col-4'>{{lender?.name}}</span>
+                            <hr />
+                        </li>
+                    </div>
+                    <br />
                 </div>
                 
             </ul>
@@ -230,7 +82,7 @@
                 <div class='form-row rowStyle'>
                     <label class='col-sm-3 col-form-label'>Amount:</label>
                     <input formControlName="loanAmount" [class.is-invalid]="loanRequestForm.get('loanAmount').touched && loanRequestForm.get('loanAmount').invalid"
-                     type='number' class='form-control col-sm-9' placeholder="Rupees">
+                     type='number' class='form-control requestInput col-sm-9' placeholder="Rupees">
                     <div class='errorDisp' *ngIf="loanRequestForm.get('loanAmount').invalid && loanRequestForm.get('loanAmount').touched">
                         <small class='text-danger' *ngIf=" loanRequestForm.get('loanAmount').errors?.required">Required</small>
                     </div>
@@ -238,7 +90,7 @@
                 <div class='form-row rowStyle'>
                     <label class='col-sm-3 col-form-label'>Tenure:</label>
                     <input formControlName="tenure" [class.is-invalid]="loanRequestForm.get('tenure').touched && loanRequestForm.get('tenure').invalid"
-                     type='number' class='form-control col-sm-9' placeholder="Months">
+                     type='number' class='form-control requestInput col-sm-9' placeholder="Months">
                     <div class='errorDisp' *ngIf="loanRequestForm.get('tenure').invalid && loanRequestForm.get('tenure').touched">
                         <small class='text-danger' *ngIf=" loanRequestForm.get('tenure').errors?.required">Required</small>
                     </div>

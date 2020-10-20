@@ -29,14 +29,26 @@ export class LendingService {
                   .pipe(catchError(this.handleError));
   }
 
+  getNotificationRequests(userId: number){
+    let url: string = "http://localhost:8080/loan/notificationRequests/"+userId;
+    return this.http.get<any>(url)
+                      .pipe(catchError(this.handleError));
+  }
+  
   getReceivedRequests(userId: number){
     let url: string = "http://localhost:8080/loan/receivedRequests/"+userId;
     return this.http.get<any>(url)
                       .pipe(catchError(this.handleError));
   }
-
+  
   getLenders(userId: number){
     let url: string = "http://localhost:8080/user/getall/"+userId;
+    return this.http.get<UserModel[]>(url)
+              .pipe(catchError(this.handleError));
+  }
+
+  getLendersBySearchName(userId:number, searchName:string){
+    let url: string = "http://localhost:8080/user/search/"+userId+"/"+searchName;
     return this.http.get<UserModel[]>(url)
               .pipe(catchError(this.handleError));
   }

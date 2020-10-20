@@ -102,4 +102,8 @@ export class SignUpAndLogInComponent implements OnInit {
         );
     }
   }
+
+  refresh(): void {
+    window.location.reload();
+  }
 }

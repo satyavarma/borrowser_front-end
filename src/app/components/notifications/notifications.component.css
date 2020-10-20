@@ -1,0 +1,115 @@
+.navUl{ 
+    padding-left:50px;
+    width:100%;
+    background-color: rgb(9, 94, 116);
+}
+.navLi{
+    display:inline-block;
+    padding:5px;
+    padding-right:50px;
+    color:white;
+    font-size: small;
+}
+.navLi:hover{
+    color:black;
+    background-color:rgb(131, 185, 199);
+    cursor:pointer;
+}
+.navBtn{
+    float:right;
+    border:0px;
+    background-color:rgb(241, 88, 32);
+    color:white;
+    padding:1px;
+    padding-left:10px;
+    padding-right:10px;
+    border-radius:3px;
+    margin-right:20px;
+    margin-top:5px;
+}
+.navBtn:hover{
+    box-shadow:2px 3px 5px red;
+}
+.activeElement:hover{
+    color:white;
+    background-color:teal;
+    cursor:pointer;
+}
+.activeElement{
+    color:white;
+    background-color:teal;
+    cursor:pointer;
+}
+.errorResponse{
+    padding:10px;
+    padding-top:12px;
+    padding-bottom:15px;
+    border-radius:4px;
+    color:maroon;
+    background-color:lightpink;
+}
+.errorCancel{
+    border:0px;
+    background-color:lightpink;
+    color:maroon;
+}
+.successCancel{
+    border:0px;
+    background-color:rgb(107, 221, 178);
+    color:rgb(2, 59, 59);;
+}
+.successResponse{
+    padding:10px;
+    padding-top:12px;
+    padding-bottom:15px;
+    border-radius:4px;
+    color:rgb(2, 59, 59);
+    background-color: rgb(107, 221, 178);
+}
+.response{
+    display: absolute;
+    float:right;
+    margin-top:0px;
+    margin-right:20px;
+}
+.requests{
+    border-radius: 10px;
+    background-color: rgba(243, 247, 246, 0.932);
+    box-shadow:1px 1px 4px grey;
+    margin-top:30px;
+}
+.requestStatus{
+    float:right;
+    align-content: center;
+    text-align:center;
+}
+.requestTenure{
+    float:right;
+    text-align:center;
+}
+.requestAmount{
+    text-align:center;
+    float:right;
+}
+.requestName{
+    float:right;
+    text-align:center;
+}
+.requestSNo{
+    text-align:center;
+}
+.scroll { 
+    height: 360px; 
+    overflow-x: hidden; 
+    overflow-y: auto; 
+    text-align:justify; 
+}
+.notificationHeader{
+    padding:20px;
+}
+.notificationDescription{
+    padding:20px;
+}
+div{
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}

@@ -28,8 +28,7 @@ export class UserComponent implements OnInit {
     });
     let signedUserId:string = localStorage.getItem('signedUserId') ? localStorage.getItem('signedUserId') : '0' ;
     if(parseInt(signedUserId) != this.userId){
-      localStorage.removeItem('signedUserId');
-      this.router.navigate(['../../'],{relativeTo:this.route});
+      this.onLogout();
     }
     else{
       let std = new Date(localStorage.getItem('signedDate')); 
@@ -42,9 +41,7 @@ export class UserComponent implements OnInit {
         localStorage.setItem('signedDate',date.toString());
       }
       else{
-        localStorage.removeItem('signedUserId');
-        localStorage.removeItem('signedDate');
-        this.router.navigate(['../../'],{relativeTo:this.route});
+        this.onLogout();
       }
     }
     this.inviteForm = this.fb.group(
@@ -147,6 +144,7 @@ export class UserComponent implements OnInit {
   
   onLogout(){
     localStorage.removeItem('signedUserId');
+    localStorage.removeItem('signedDate');
     this.router.navigate(['../../'],{relativeTo:this.route})
   }
 }

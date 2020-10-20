@@ -23,8 +23,7 @@ export class NotificationsComponent implements OnInit {
     });
     let signedUserId:string = localStorage.getItem('signedUserId') ? localStorage.getItem('signedUserId') : '0' ;
     if(parseInt(signedUserId) != this.userId){
-      localStorage.removeItem('signedUserId');
-      this.router.navigate(['../../'],{relativeTo:this.route});
+      this.onLogout();
     }
     else{
       let std = new Date(localStorage.getItem('signedDate')); 
@@ -37,18 +36,16 @@ export class NotificationsComponent implements OnInit {
         localStorage.setItem('signedDate',date.toString());
       }
       else{
-        localStorage.removeItem('signedUserId');
-        localStorage.removeItem('signedDate');
-        this.router.navigate(['../../'],{relativeTo:this.route});
+        this.onLogout();
       }
     }
-    this.lendingService.getSentRequests(this.userId)
+    this.lendingService.getNotificationRequests(this.userId)
     .subscribe(
       data =>{
         let result = data;
         if(result["statusCodeValue"] == 404){
           this.responseErrorNote=true;
-          this.responseNoteValue="No Requests Found!..";
+          this.responseNoteValue="You Don't Have Any Notifications Currently!..";
         }
         else if(result["statusCodeValue"] == 200){
           this.sentRequests = result["body"];
@@ -78,6 +75,7 @@ export class NotificationsComponent implements OnInit {
 
   onLogout(){
     localStorage.removeItem('signedUserId');
+    localStorage.removeItem('signedDate');
     this.router.navigate(['../../'],{relativeTo:this.route})
   }
 }

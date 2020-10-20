@@ -22,8 +22,7 @@ export class SentRequestsComponent implements OnInit {
     });
     let signedUserId:string = localStorage.getItem('signedUserId') ? localStorage.getItem('signedUserId') : '0' ;
     if(parseInt(signedUserId) != this.userId){
-      localStorage.removeItem('signedUserId');
-      this.router.navigate(['../../'],{relativeTo:this.route});
+      this.onLogout();
     }
     else{
       let std = new Date(localStorage.getItem('signedDate')); 
@@ -36,9 +35,7 @@ export class SentRequestsComponent implements OnInit {
         localStorage.setItem('signedDate',date.toString());
       }
       else{
-        localStorage.removeItem('signedUserId');
-        localStorage.removeItem('signedDate');
-        this.router.navigate(['../../'],{relativeTo:this.route});
+        this.onLogout();
       }
     }
     this.lendingService.getSentRequests(this.userId)
@@ -47,7 +44,7 @@ export class SentRequestsComponent implements OnInit {
         let result = data;
         if(result["statusCodeValue"] == 404){
           this.responseErrorNote=true;
-          this.responseNoteValue="No Requests Found!..";
+          this.responseNoteValue="No Borrow Requests!..";
         }
         else if(result["statusCodeValue"] == 200){
           this.sentRequests = result["body"];
@@ -77,6 +74,7 @@ export class SentRequestsComponent implements OnInit {
   
   onLogout(){
     localStorage.removeItem('signedUserId');
+    localStorage.removeItem('signedDate');
     this.router.navigate(['../../'],{relativeTo:this.route})
   }
 }

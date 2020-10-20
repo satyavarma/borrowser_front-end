@@ -1,0 +1,183 @@
+div{
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.navUl{ 
+    padding-left:50px;
+    width:100%;
+    background-color: rgb(9, 94, 116);
+}
+.navLi{
+    display:inline-block;
+    padding:5px;
+    padding-right:50px;
+    color:white;
+    font-size: small;
+}
+.navLi:hover{
+    color:black;
+    background-color:rgb(131, 185, 199);
+    cursor:pointer;
+}
+.navBtn{
+    float:right;
+    border:0px;
+    background-color:rgb(241, 88, 32);
+    color:white;
+    padding:1px;
+    padding-left:10px;
+    padding-right:10px;
+    border-radius:3px;
+    margin-right:20px;
+    margin-top:5px;
+}
+.navBtn:hover{
+    box-shadow:2px 3px 5px red;
+}
+.activeElement:hover{
+    color:white;
+    background-color:teal;
+    cursor:pointer;
+}
+.activeElement{
+    color:white;
+    background-color:teal;
+    cursor:pointer;
+}
+.errorResponse{
+    padding:10px;
+    padding-top:12px;
+    padding-bottom:15px;
+    border-radius:4px;
+    color:maroon;
+    background-color:lightpink;
+}
+.errorCancel{
+    border:0px;
+    background-color:lightpink;
+    color:maroon;
+}
+.successCancel{
+    border:0px;
+    background-color:rgb(107, 221, 178);
+    color:rgb(2, 59, 59);;
+}
+.successResponse{
+    padding:10px;
+    padding-top:12px;
+    padding-bottom:15px;
+    border-radius:4px;
+    color:rgb(2, 59, 59);
+    background-color: rgb(107, 221, 178);
+}
+.response{
+    display: absolute;
+    float:right;
+    margin-top:0px;
+    margin-right:20px;
+}
+.requests{
+    border-radius: 10px;
+    background-color: rgba(243, 247, 246, 0.932);
+    box-shadow:1px 1px 4px grey;
+    margin-top:30px;
+}
+.requestStatus{
+    float:right;
+    align-content: center;
+    text-align:center;
+}
+.requestTenure{
+    float:right;
+    text-align:center;
+}
+.requestAmount{
+    text-align:center;
+    float:right;
+}
+.requestName{
+    float:right;
+    text-align:center;
+}
+.requestSNo{
+    text-align:center;
+}
+.acceptButton{
+    width:100px;
+    border-radius:3px;
+    border:0px;
+    padding:2px;
+    background-color:teal;
+    color:white;
+    margin:2px;
+}
+.acceptButton:hover{
+    box-shadow:2px 2px 2px #36eb9f;
+}
+.rejectButton{
+    width:100px;
+    border-radius:3px;
+    border:0px;
+    padding:2px;
+    background-color:rgb(245, 12, 12);
+    color:white;
+    margin:2px;
+}
+.rejectButton:hover{
+    box-shadow:2px 2px 2px #eb5a47;
+}
+.modal-header{
+    background-color: teal;
+    border-radius: 2px;
+    color:white;
+    margin-top:0px;
+    padding:5px;
+    font-size: 25px;
+}
+.modal-crossButton{
+    border:0px;
+    background-color:teal;
+    color:rgb(253, 253, 253);
+}
+.modal-crossButton:hover{
+    color:rgb(221, 29, 29);
+    border-radius:5px;
+}
+.fixedData{
+    padding:15px;
+}
+.modalSubmit{
+    float:right;
+    background:rgb(9, 94, 116);
+    color:white;
+    border:0px;
+    padding:3px;
+    margin-right:10px;
+    margin-top:10px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+}
+.modalSubmit:hover{
+    box-shadow: 1px 2px 5px cyan;
+    border-radius: 3px;
+    padding-top:4px;
+    padding-left:4px;
+}
+.acceptRequestBox{
+    border:1px solid rgb(147, 175, 175);
+    padding:5px;
+    background-color: rgb(212, 250, 250);
+}
+.rightFloat{
+    float:right;
+}
+.scroll { 
+    height: 365px; 
+    overflow-x: hidden; 
+    overflow-y: auto; 
+    text-align:justify; 
+}
+.repaySubBox{
+    border:1px solid rgb(147, 175, 175);
+    padding:5px;
+    background-color: rgb(212, 250, 250);
+}

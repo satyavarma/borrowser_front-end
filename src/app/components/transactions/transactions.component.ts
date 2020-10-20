@@ -39,8 +39,7 @@ export class TransactionsComponent implements OnInit {
     });
     let signedUserId:string = localStorage.getItem('signedUserId') ? localStorage.getItem('signedUserId') : '0' ;
     if(parseInt(signedUserId) != this.userId){
-      localStorage.removeItem('signedUserId');
-      this.router.navigate(['../../'],{relativeTo:this.route});
+      this.onLogout();
     }
     else{
       let std = new Date(localStorage.getItem('signedDate')); 
@@ -53,48 +52,10 @@ export class TransactionsComponent implements OnInit {
         localStorage.setItem('signedDate',date.toString());
       }
       else{
-        localStorage.removeItem('signedUserId');
-        localStorage.removeItem('signedDate');
-        this.router.navigate(['../../'],{relativeTo:this.route});
+        this.onLogout();
       }
     }
-    this.lendingService.getBorrowededTransactions(this.userId)
-      .subscribe(
-        data =>{
-          let result = data;
-          if(result["statusCodeValue"] == 404){
-            this.responseErrorNote=true;
-            this.responseNoteValue="No Borrowed Transactions Found!..";
-          }
-          else if(result["statusCodeValue"] == 200){
-            this.borrowedTransactions = result["body"];
-          }
-        },
-        error => {
-          this.responseErrorNote=true;
-          this.responseNoteValue="Something went Wrong!..";
-          console.log('error:',error);
-        }
-      );
-
-      this.lendingService.getLendedTransactions(this.userId)
-      .subscribe(
-        data =>{
-          let result = data;
-          if(result["statusCodeValue"] == 404){
-            this.responseErrorNote=true;
-            this.responseNoteValue="No Lend Transactions Found!..";
-          }
-          else if(result["statusCodeValue"] == 200){
-            this.lendedTransactions = result["body"];
-          }
-        },
-        error => {
-          this.responseErrorNote=true;
-          this.responseNoteValue="Something went Wrong!..";
-          console.log('error:',error);
-        }
-      );
+    this.onShowLended();      
   }
 
 
@@ -212,18 +173,18 @@ export class TransactionsComponent implements OnInit {
     var newd:any = new Date();
     var diff:number =  (newd.getMonth() - std.getMonth() + (12 * (newd.getFullYear() - std.getFullYear())))? (newd.getMonth() - std.getMonth() + (12 * (newd.getFullYear() - std.getFullYear()))) : 0 ;
     if(diff == 0){
-      this.interest= ((amount/100)*(6/12));
+      this.interest= ((amount/100)*(6));
       this.fine = 0;
       this.totalAmount = amount + this.interest + this.fine;
     }
     else if(diff<=tenure){
-      this.interest= ((amount/100)*(6/12)*diff);
+      this.interest= ((amount/100)*(6)*diff);
       this.fine = 0;
       this.totalAmount = amount + this.interest + this.fine;
     }
     else if(diff>tenure){
-      this.interest= ((amount/100)*(6/12)*diff);
-      this.fine = ((amount/100)*(6/12)*(diff-tenure));
+      this.interest= ((amount/100)*(6)*diff);
+      this.fine = ((amount/100)*(6)*(diff-tenure));
       this.totalAmount = amount + this.interest + this.fine;
     }
     return this.interest;
@@ -240,10 +201,48 @@ export class TransactionsComponent implements OnInit {
   onShowBorrowed(){
     this.classLend = false;
     this.classBorrow = true;
+    this.lendingService.getBorrowededTransactions(this.userId)
+      .subscribe(
+        data =>{
+          let result = data;
+          if(result["statusCodeValue"] == 404){
+            this.responseErrorNote=true;
+            this.responseNoteValue="No Borrowed Transactions Found!..";
+          }
+          else if(result["statusCodeValue"] == 200){
+            this.borrowedTransactions = result["body"];
+            this.responseErrorNote=false;
+          }
+        },
+        error => {
+          this.responseErrorNote=true;
+          this.responseNoteValue="Something went Wrong!..";
+          console.log('error:',error);
+        }
+      );
   }
   onShowLended(){
     this.classLend = true;
     this.classBorrow = false;
+    this.lendingService.getLendedTransactions(this.userId)
+      .subscribe(
+        data =>{
+          let result = data;
+          if(result["statusCodeValue"] == 404){
+            this.responseErrorNote=true;
+            this.responseNoteValue="No Lend Transactions Found!..";
+          }
+          else if(result["statusCodeValue"] == 200){
+            this.lendedTransactions = result["body"];
+            this.responseErrorNote=false;
+          }
+        },
+        error => {
+          this.responseErrorNote=true;
+          this.responseNoteValue="Something went Wrong!..";
+          console.log('error:',error);
+        }
+      );
   }
   onResponseCancel(){
     this.responseErrorNote = false;
@@ -252,6 +251,7 @@ export class TransactionsComponent implements OnInit {
   }
   onLogout(){
     localStorage.removeItem('signedUserId');
+    localStorage.removeItem('signedDate');
     this.router.navigate(['../../'],{relativeTo:this.route})
   }
 }

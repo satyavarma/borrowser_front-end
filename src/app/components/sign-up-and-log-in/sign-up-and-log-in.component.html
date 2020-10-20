@@ -1,4 +1,6 @@
-<div class='navDoop'></div>
+<ul class='navUl'>
+    <li class='navLi' (click)="refresh()"><b><span>&#8377;</span>/-</b> Borrowser</li>
+</ul>
 <div id="divRight">
     <div id="contentStyle">
         <i>
@@ -50,7 +52,7 @@
         <div class='form-row rowStyle'>
             <label class='col-sm-3 col-form-label'>Password:</label>
             <input formControlName="password" [class.is-invalid]="signUpForm.get('password').touched && signUpForm.get('password').invalid"
-            type='password' class='form-control col-sm-9'>
+            type='password' class='form-control col-sm-9'><i class="fa fa-eye-slash"></i>
             <div class='errorDisp' *ngIf="signUpForm.get('password').errors && signUpForm.get('password').touched">
                 <small class='text-danger' *ngIf="signUpForm.get('password').errors?.required">Required</small>
             </div>

@@ -1,0 +1,193 @@
+.navUl{ 
+    padding-left:50px;
+    width:100%;
+    background-color: rgb(9, 94, 116);
+}
+.navLi{
+    display:inline-block;
+    padding:5px;
+    padding-right:50px;
+    color:white;
+    font-size: small;
+}
+.navLi:hover{
+    color:black;
+    background-color:rgb(131, 185, 199);
+    cursor:pointer;
+}
+.navBtn{
+    float:right;
+    border:0px;
+    background-color:rgb(241, 88, 32);
+    color:white;
+    padding:1px;
+    padding-left:10px;
+    padding-right:10px;
+    border-radius:3px;
+    margin-right:20px;
+    margin-top:5px;
+}
+.navBtn:hover{
+    box-shadow:2px 3px 5px red;
+}
+.lenders{
+    border-radius:10px;
+    background-color: rgba(243, 247, 246, 0.932);
+    box-shadow:1px 1px 4px grey;
+    margin-top:30px;
+}
+.lenderContactNumber{
+    float:right;
+    text-align: center;
+}
+.lenderButton{
+    width:100px;
+    border-radius:5px;
+    border:0px;
+    padding:2px;
+    background-color:teal;
+    color:white;
+}
+.lenderButton:hover{
+    box-shadow:2px 2px 2px #36eb9f;
+}
+.lenderRequest{
+    float:right;
+    align-content: center;
+    text-align:center;
+}
+.lenderContactNumber{
+    float:right;
+    text-align:center;
+}
+.lenderUsername{
+    text-align:center;
+    float:right;
+}
+.lenderName{
+    float:right;
+    text-align:center;
+}
+.lenderSNo{
+    text-align:center;
+}
+.errorResponse{
+    padding:10px;
+    padding-top:12px;
+    padding-bottom:15px;
+    border-radius:4px;
+    color:maroon;
+    background-color:lightpink;
+}
+.errorCancel{
+    border:0px;
+    background-color:lightpink;
+    color:maroon;
+}
+.successCancel{
+    border:0px;
+    background-color:rgb(107, 221, 178);
+    color:rgb(2, 59, 59);;
+}
+.successResponse{
+    padding:10px;
+    padding-top:12px;
+    padding-bottom:15px;
+    border-radius:4px;
+    color:rgb(2, 59, 59);
+    background-color: rgb(107, 221, 178);
+}
+.response{
+    display: absolute;
+    float:right;
+    margin-top:0px;
+    margin-right:20px;
+}
+.modal-header{
+    background-color: teal;
+    border-radius: 2px;
+    color:white;
+    margin-top:0px;
+    padding:5px;
+    font-size: 25px;
+}
+.modalSubmit{
+    float:right;
+    background:rgb(9, 94, 116);
+    color:white;
+    border:0px;
+    padding:3px;
+    margin-right:10px;
+    margin-top:10px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+}
+.modalSubmit:hover{
+    box-shadow: 1px 2px 5px cyan;
+    border-radius: 3px;
+    padding-top:4px;
+    padding-left:4px;
+}
+.modal-crossButton{
+    border:0px;
+    background-color:teal;
+    color:rgb(253, 253, 253);
+}
+.modal-crossButton:hover{
+    color:rgb(221, 29, 29);
+    border-radius:5px;
+}
+.errorDisp{
+    margin-left: 120px;
+}
+
+.rowStyle{
+    padding:5px;
+}
+
+.requestInput{
+    border-top:0px;
+    border-right:0px;
+    border-left:0px;
+}
+.fixedData{
+    padding:15px;
+}
+.searchBtn{
+    width:75px;
+    height: 38px;
+    border-top-right-radius:4px;
+    border-bottom-right-radius:4px;
+    border:0px;
+    padding-top:1px;
+    padding-bottom:1px;
+    margin-left:-1px;
+    background-color:rgb(42, 65, 100) ;
+    color:white;
+}
+.searchBtn:hover{
+    box-shadow:1px 1px 1px rgb(125, 157, 206) ;
+}
+.showAllBtn{
+    width:75px;
+    height: 38px;
+    border-radius:4px;
+    border:0px;
+    padding-top:1px;
+    padding-bottom:1px;
+    margin-left:20px;
+    background-color:rgb(42, 65, 100) ;
+    color:white;
+}
+.showAllBtn:hover{
+    box-shadow:1px 1px 1px rgb(125, 157, 206) ;
+}
+.scroll { 
+    height: 285px; 
+    overflow-x: hidden; 
+    overflow-y: auto; 
+    text-align:justify; 
+} 
+div{
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
